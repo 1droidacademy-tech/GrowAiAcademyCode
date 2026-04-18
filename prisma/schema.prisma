@@ -1,0 +1,93 @@
+// This is your Prisma schema file.
+// Learn more: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
+}
+
+datasource db {
+  provider = "postgresql"
+  schemas  = ["growaiedu", "public"]
+}
+
+enum Role {
+  STUDENT
+  ADMIN
+  @@schema("growaiedu")
+}
+
+model User {
+  id            String   @id @default(uuid())
+  name          String
+  email         String   @unique
+  phone         String   @unique
+  password_hash String
+  role          Role     @default(STUDENT)
+  school_name   String?
+  class_grade   String?
+  created_at    DateTime @default(now())
+
+  enrollments Enrollment[]
+  payments    Payment[]
+
+  @@schema("growaiedu")
+}
+
+model Course {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  price       Float
+  level       String
+  duration    String
+  status      String   @default("ACTIVE") // ACTIVE, DRAFT, ARCHIVED
+  created_at  DateTime @default(now())
+
+  enrollments Enrollment[]
+  payments    Payment[]
+
+  @@schema("growaiedu")
+}
+
+model Enrollment {
+  id             String   @id @default(uuid())
+  user           User     @relation(fields: [user_id], references: [id])
+  user_id        String
+  course         Course   @relation(fields: [course_id], references: [id])
+  course_id      String
+  payment_status String // e.g., "PENDING", "COMPLETED", "FAILED"
+  payment_id     String?
+  enrolled_at    DateTime @default(now())
+
+  @@unique([user_id, course_id])
+  @@schema("growaiedu")
+}
+
+model Payment {
+  id                  String   @id @default(uuid())
+  user                User     @relation(fields: [user_id], references: [id])
+  user_id             String
+  course              Course   @relation(fields: [course_id], references: [id])
+  course_id           String
+  amount              Float
+  payment_gateway     String   @default("razorpay")
+  razorpay_order_id   String?
+  razorpay_payment_id String?
+  razorpay_signature  String?
+  status              String // e.g., "SUCCESS", "FAILED"
+  created_at          DateTime @default(now())
+
+  @@schema("growaiedu")
+}
+
+model ContactMessage {
+  id         String   @id @default(uuid())
+  name       String
+  email      String
+  phone      String
+  message    String
+  created_at DateTime @default(now())
+
+  @@schema("growaiedu")
+}
