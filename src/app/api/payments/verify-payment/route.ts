@@ -26,6 +26,22 @@ export async function POST(req: Request) {
     const decoded = verifyToken(token);
     if (!decoded) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
 
+    // Prevent foreign key constraint errors if DB isn't seeded
+    const courseExists = await prisma.course.findUnique({ where: { id: courseId } });
+    if (!courseExists) {
+      await prisma.course.create({
+        data: {
+          id: courseId,
+          title: "Mastering Neural Architectures (AI Bootcamp)",
+          description: "Journey through the deep layers of modern AI.",
+          price: 544,
+          level: "Advanced",
+          duration: "12 Weeks",
+          status: "ACTIVE"
+        }
+      });
+    }
+
     // Store Payment and Enrollment records
     await prisma.$transaction([
       prisma.payment.create({

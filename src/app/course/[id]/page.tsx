@@ -1,13 +1,28 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
-// import EnrollButton from "./EnrollButton";
+import EnrollButton from "./EnrollButton";
 import Image from "next/image";
+import { prisma } from "@/lib/prisma";
+import { verifyToken } from "@/lib/auth";
 
 export default async function CourseEnrollment({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = await params;
   const cookieStore = await cookies();
   const token = cookieStore.get("growaiedu_token")?.value;
   const isLoggedIn = !!token;
+
+  let isEnrolled = false;
+  if (isLoggedIn && token) {
+     const decoded = verifyToken(token);
+     if (decoded) {
+        const enrollment = await prisma.enrollment.findUnique({
+           where: { user_id_course_id: { user_id: decoded.id as string, course_id: resolvedParams.id } }
+        });
+        if (enrollment && enrollment.payment_status === "COMPLETED") {
+           isEnrolled = true;
+        }
+     }
+  }
 
   return (
     <main className="min-h-screen bg-[#F8FAFC] font-sans pb-20 pt-24 px-6 text-slate-800">
@@ -80,50 +95,61 @@ export default async function CourseEnrollment({ params }: { params: Promise<{ i
         </div>
 
         {/* Right Side: Summary Block */}
-        <div className="bg-white p-10 rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/40">
-           <h2 className="text-xl font-bold text-slate-800 mb-8">Enrollment Summary</h2>
-           
-           <div className="space-y-4 text-sm font-medium border-b border-slate-100 pb-6 mb-6">
-              <div className="flex justify-between items-center">
-                 <span className="text-slate-500">Base Tuition</span>
-                 <span className="text-slate-800 font-bold">₹599.00</span>
-              </div>
-              <div className="flex justify-between items-center">
-                 <span className="text-slate-500">Cloud Lab Credits</span>
-                 <span className="text-slate-800 font-bold">₹45.00</span>
-              </div>
-              <div className="flex justify-between items-center">
-                 <span className="text-slate-500">Early Access Discount</span>
-                 <span className="text-indigo-600 font-bold">-₹100.00</span>
-              </div>
+        {isEnrolled ? (
+           <div className="bg-white p-10 rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/40 text-center flex flex-col justify-center items-center h-full">
+             <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-4xl mb-6">🎉</div>
+             <h2 className="text-2xl font-bold text-slate-800 mb-2">You're Enrolled!</h2>
+             <p className="text-slate-500 mb-8 max-w-sm">You have full access to this course. Let's start building the future together.</p>
+             <Link href="/student-dashboard" className="w-full">
+               <button className="w-full bg-[#3F3EE8] hover:bg-indigo-700 text-white rounded-2xl py-4 font-bold text-lg transition-colors shadow-lg shadow-indigo-500/30">
+                  Go to Dashboard
+               </button>
+             </Link>
            </div>
+        ) : (
+           <div className="bg-white p-10 rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/40">
+              <h2 className="text-xl font-bold text-slate-800 mb-8">Enrollment Summary</h2>
+              
+              <div className="space-y-4 text-sm font-medium border-b border-slate-100 pb-6 mb-6">
+                 <div className="flex justify-between items-center">
+                    <span className="text-slate-500">Base Tuition</span>
+                    <span className="text-slate-800 font-bold">₹599.00</span>
+                 </div>
+                 <div className="flex justify-between items-center">
+                    <span className="text-slate-500">Cloud Lab Credits</span>
+                    <span className="text-slate-800 font-bold">₹45.00</span>
+                 </div>
+                 <div className="flex justify-between items-center">
+                    <span className="text-slate-500">Early Access Discount</span>
+                    <span className="text-indigo-600 font-bold">-₹100.00</span>
+                 </div>
+              </div>
 
-           <div className="flex justify-between items-end mb-10 text-slate-800">
-              <div className="text-xs font-bold text-slate-400 uppercase tracking-widest">Total Amount</div>
-              <div className="flex items-center gap-3">
-                 <div className="text-4xl font-extrabold tracking-tight">₹544.00</div>
-                 <div className="bg-cyan-100 text-cyan-700 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest leading-none mb-1">Lifetime</div>
+              <div className="flex justify-between items-end mb-10 text-slate-800">
+                 <div className="text-xs font-bold text-slate-400 uppercase tracking-widest">Total Amount</div>
+                 <div className="flex items-center gap-3">
+                    <div className="text-4xl font-extrabold tracking-tight">₹544.00</div>
+                    <div className="bg-cyan-100 text-cyan-700 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest leading-none mb-1">Lifetime</div>
+                 </div>
+              </div>
+
+              <div className="space-y-4 mb-8">
+                <label className="flex items-start gap-4 p-5 rounded-2xl border-2 border-indigo-500 bg-indigo-50 cursor-pointer transition-colors relative overflow-hidden">
+                  <input type="radio" name="paymentType" value="onetime" defaultChecked className="mt-1 w-5 h-5 accent-indigo-600" />
+                  <div>
+                     <div className="font-bold text-slate-900">One-time Payment</div>
+                     <div className="text-xs text-slate-500 mt-0.5">Full access immediately</div>
+                  </div>
+                </label>
+              </div>
+
+              <EnrollButton courseId={resolvedParams.id} isLoggedIn={isLoggedIn} />
+              
+              <div className="mt-4 flex justify-center text-xs font-medium text-slate-400">
+                🔒 Encrypted secure 256-bit checkout by Razorpay
               </div>
            </div>
-
-           <div className="space-y-4 mb-8">
-             <label className="flex items-start gap-4 p-5 rounded-2xl border-2 border-indigo-500 bg-indigo-50 cursor-pointer transition-colors relative overflow-hidden">
-               <input type="radio" name="paymentType" value="onetime" defaultChecked className="mt-1 w-5 h-5 accent-indigo-600" />
-               <div>
-                  <div className="font-bold text-slate-900">One-time Payment</div>
-                  <div className="text-xs text-slate-500 mt-0.5">Full access immediately</div>
-               </div>
-             </label>
-           </div>
-
-           <button className="w-full bg-[#3F3EE8] hover:bg-indigo-700 text-white rounded-2xl py-4 font-bold text-lg transition-colors shadow-lg shadow-indigo-500/30">
-              Complete Enrollment
-           </button>
-           
-           <div className="mt-4 flex justify-center text-xs font-medium text-slate-400">
-             🔒 Encrypted secure 256-bit checkout by Razorpay
-           </div>
-        </div>
+        )}
 
       </div>
     </main>
