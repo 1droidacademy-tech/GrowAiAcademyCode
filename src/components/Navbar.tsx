@@ -16,7 +16,7 @@ export default function Navbar({ user }: NavbarProps) {
     <nav className="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
-          <div className="relative w-32 md:w-40 h-10 overflow-hidden">
+          <div className="relative w-40 md:w-44 h-12 md:h-10 overflow-hidden">
             <Image src="/logo.png" alt="GrowAiEdu Logo" fill className="object-contain" />
           </div>
         </Link>
