@@ -33,7 +33,7 @@ export async function POST(req: Request) {
     if (!decoded) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
 
     // Fetch order from Razorpay to get actual amount
-    const order = await razorpay.orders.fetch(razorpay_order_id);
+    const order = await razorpay.orders.fetch(razorpay_order_id) as any;
     const amountPaid = order.amount / 100;
 
     // Ensure course exists
