@@ -36,12 +36,9 @@ export default function LoginPage() {
       }
 
       const data = await res.json();
-      router.refresh();
-      if (data.user.role === "ADMIN") {
-        router.push("/admin-dashboard");
-      } else {
-        router.push("/student-dashboard");
-      }
+      // Use window.location.href for a full reload/redirect to guarantee 
+      // the Server Component Navbar re-reads the fresh auth cookie.
+      window.location.href = data.user.role === "ADMIN" ? "/admin-dashboard" : "/student-dashboard";
     } catch (err: any) {
       console.error("Login error:", err);
       setError(err.message);

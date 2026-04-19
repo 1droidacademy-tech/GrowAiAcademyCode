@@ -42,8 +42,9 @@ export default function SignupPage() {
         }
       }
 
-      router.refresh();
-      router.push("/student-dashboard");
+      // Use window.location.href for a full reload/redirect to guarantee 
+      // the Server Component Navbar re-reads the fresh auth cookie.
+      window.location.href = "/student-dashboard";
     } catch (err: any) {
       console.error("Signup error:", err);
       setError(err.message);

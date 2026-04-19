@@ -1,6 +1,3 @@
-// This is your Prisma schema file.
-// Learn more: https://pris.ly/d/prisma-schema
-
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["multiSchema"]
@@ -11,44 +8,35 @@ datasource db {
   schemas  = ["growaiedu", "public"]
 }
 
-enum Role {
-  STUDENT
-  ADMIN
-  @@schema("growaiedu")
-}
-
 model User {
-  id            String   @id @default(uuid())
+  id            String               @id @default(uuid())
   name          String
-  email         String   @unique
-  phone         String   @unique
+  email         String               @unique
+  phone         String               @unique
   password_hash String
-  role          Role     @default(STUDENT)
+  role          Role                 @default(STUDENT)
   school_name   String?
   class_grade   String?
-  created_at    DateTime @default(now())
-
-  enrollments Enrollment[]
-  payments    Payment[]
-
+  created_at    DateTime             @default(now())
+  enrollments   Enrollment[]
   reset_tokens  PasswordResetToken[]
+  payments      Payment[]
 
   @@schema("growaiedu")
 }
 
 model Course {
-  id             String   @id @default(uuid())
+  id             String       @id @default(uuid())
   title          String
   description    String
   price          Float
-  early_discount Float    @default(0)
   level          String
   duration       String
-  status         String   @default("ACTIVE") // ACTIVE, DRAFT, ARCHIVED
-  created_at     DateTime @default(now())
-
-  enrollments Enrollment[]
-  payments    Payment[]
+  status         String       @default("ACTIVE")
+  created_at     DateTime     @default(now())
+  early_discount Float        @default(0)
+  enrollments    Enrollment[]
+  payments       Payment[]
 
   @@schema("growaiedu")
 }
@@ -65,13 +53,13 @@ model PromoCode {
 
 model Enrollment {
   id             String   @id @default(uuid())
-  user           User     @relation(fields: [user_id], references: [id])
   user_id        String
-  course         Course   @relation(fields: [course_id], references: [id])
   course_id      String
-  payment_status String // e.g., "PENDING", "COMPLETED", "FAILED"
+  payment_status String
   payment_id     String?
   enrolled_at    DateTime @default(now())
+  course         Course   @relation(fields: [course_id], references: [id])
+  user           User     @relation(fields: [user_id], references: [id])
 
   @@unique([user_id, course_id])
   @@schema("growaiedu")
@@ -79,17 +67,17 @@ model Enrollment {
 
 model Payment {
   id                  String   @id @default(uuid())
-  user                User     @relation(fields: [user_id], references: [id])
   user_id             String
-  course              Course   @relation(fields: [course_id], references: [id])
   course_id           String
   amount              Float
   payment_gateway     String   @default("razorpay")
   razorpay_order_id   String?
   razorpay_payment_id String?
   razorpay_signature  String?
-  status              String // e.g., "SUCCESS", "FAILED"
+  status              String
   created_at          DateTime @default(now())
+  course              Course   @relation(fields: [course_id], references: [id])
+  user                User     @relation(fields: [user_id], references: [id])
 
   @@schema("growaiedu")
 }
@@ -109,9 +97,16 @@ model PasswordResetToken {
   id         String   @id @default(uuid())
   token      String   @unique
   user_id    String
-  user       User     @relation(fields: [user_id], references: [id])
   expires_at DateTime
   created_at DateTime @default(now())
+  user       User     @relation(fields: [user_id], references: [id])
+
+  @@schema("growaiedu")
+}
+
+enum Role {
+  STUDENT
+  ADMIN
 
   @@schema("growaiedu")
 }
