@@ -114,7 +114,7 @@ export default function LoginPage() {
                    type="email" required
                    className="w-full bg-slate-100 rounded-xl px-4 py-4 bg-opacity-70 border-none focus:ring-2 focus:ring-indigo-500 font-medium" 
                    value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})}
-                   placeholder="john@nebula.ai"
+                   placeholder="Your Email"
                  />
               </div>
               <div className="space-y-1">
