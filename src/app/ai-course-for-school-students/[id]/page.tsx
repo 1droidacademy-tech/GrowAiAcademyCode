@@ -76,17 +76,17 @@ export default async function CourseEnrollment({ params }: { params: Promise<{ i
 
           <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-3 md:gap-4 mb-10 relative z-10">
              <div className="bg-white px-4 md:px-6 py-4 rounded-2xl shadow-sm border border-slate-50">
-               <div className="w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-xs mb-2">⏱</div>
+               <div className="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-lg mb-2">⏱</div>
                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Duration</div>
-               <div className="font-bold text-xs md:text-sm">12 Weeks</div>
+               <div className="font-bold text-xs md:text-sm">2 Weeks</div>
              </div>
              <div className="bg-white px-4 md:px-6 py-4 rounded-2xl shadow-sm border border-slate-50">
-               <div className="w-6 h-6 bg-cyan-100 text-cyan-600 rounded-full flex items-center justify-center text-xs mb-2">🎓</div>
+               <div className="w-10 h-10 bg-cyan-100 text-cyan-600 rounded-full flex items-center justify-center text-lg mb-2">🎓</div>
                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Level</div>
-               <div className="font-bold text-xs md:text-sm">Advanced</div>
+               <div className="font-bold text-xs md:text-sm">Intermediate</div>
              </div>
              <div className="bg-white px-4 md:px-6 py-4 rounded-2xl shadow-sm border border-slate-50 col-span-2 sm:col-span-1">
-               <div className="w-6 h-6 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-xs mb-2">🏅</div>
+               <div className="w-10 h-10 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-lg mb-2">🏅</div>
                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Credential</div>
                <div className="font-bold text-xs md:text-sm">Verified</div>
              </div>
@@ -95,7 +95,7 @@ export default async function CourseEnrollment({ params }: { params: Promise<{ i
           <div className="mb-10 relative z-10">
             <div className="flex items-center gap-4">
                <div className="w-12 h-12 bg-slate-200 rounded-full overflow-hidden relative border-2 border-white shadow-sm">
-                 <Image src="/ai-course-students-india.png" alt="Bharathi, Lead AI Mentor at GrowAiEdu India" fill className="object-cover" />
+                 <Image src="/lead_mentor.png" alt="Bharathi, Lead AI Mentor at GrowAiEdu India" fill className="object-cover" />
                </div>
                <div>
                  <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">Lead Mentor</div>

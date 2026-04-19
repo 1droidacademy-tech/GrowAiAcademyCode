@@ -37,8 +37,8 @@ export default function UserMenu({ user }: UserMenuProps) {
       });
       if (res.ok) {
         setIsOpen(false);
-        router.refresh();
-        router.push("/");
+        // Force a full page reload to ensure all server and client state is reset
+        window.location.href = "/";
       }
     } catch (error) {
       console.error("Logout failed:", error);
