@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 import { verifyToken } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import Image from "next/image";
+import AdminPricingManager from "@/components/AdminPricingManager";
+import AdminPromoManager from "@/components/AdminPromoManager";
 
 export default async function AdminDashboard() {
   const cookieStore = await cookies();
@@ -213,21 +215,11 @@ export default async function AdminDashboard() {
 
            {/* Side Stack */}
            <div className="space-y-8">
-              {/* Storage Widget */}
-              <div className="bg-[#5C45EE] rounded-3xl p-8 text-white shadow-xl relative overflow-hidden">
-                 <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl translate-x-10 -translate-y-10"></div>
-                 <h4 className="font-semibold mb-2 relative z-10">Storage Used</h4>
-                 <div className="flex items-end gap-2 mb-6 relative z-10">
-                   <div className="text-5xl font-bold">84%</div>
-                   <div className="text-white/60 font-medium mb-1">of 1TB</div>
-                 </div>
-                 <div className="w-full bg-white/20 rounded-full h-2 flex overflow-hidden mb-8 relative z-10">
-                    <div className="bg-white h-full shadow-[0_0_10px_white]" style={{ width: '84%' }}></div>
-                 </div>
-                 <button className="w-full bg-white/20 hover:bg-white/30 transition-colors backdrop-blur-md border border-white/20 rounded-xl py-4 font-bold relative z-10">
-                    Upgrade Plan
-                 </button>
-              </div>
+              {/* Pricing Management */}
+              <AdminPricingManager />
+
+              {/* Promo Code Management */}
+              <AdminPromoManager />
 
               {/* Recent Payments Widget */}
               <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-50">

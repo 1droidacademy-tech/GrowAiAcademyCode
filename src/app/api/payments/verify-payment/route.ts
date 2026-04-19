@@ -3,6 +3,12 @@ import crypto from "crypto";
 import { prisma } from "@/lib/prisma";
 import { cookies } from "next/headers";
 import { verifyToken } from "@/lib/auth";
+import Razorpay from "razorpay";
+
+const razorpay = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID as string,
+  key_secret: process.env.RAZORPAY_KEY_SECRET as string,
+});
 
 export async function POST(req: Request) {
   try {
@@ -26,16 +32,22 @@ export async function POST(req: Request) {
     const decoded = verifyToken(token);
     if (!decoded) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
 
-    // Prevent foreign key constraint errors if DB isn't seeded
+    // Fetch order from Razorpay to get actual amount
+    const order = await razorpay.orders.fetch(razorpay_order_id);
+    const amountPaid = order.amount / 100;
+
+    // Ensure course exists
     const courseExists = await prisma.course.findUnique({ where: { id: courseId } });
     if (!courseExists) {
+      // Create if doesn't exist (e.g. first time)
       await prisma.course.create({
         data: {
           id: courseId,
-          title: "Mastering Neural Architectures (AI Bootcamp)",
-          description: "Journey through the deep layers of modern AI.",
-          price: 544,
-          level: "Advanced",
+          title: "AI Essentials for School Students",
+          description: "A beginner-friendly course designed to introduce school students to the exciting world of Artificial Intelligence.",
+          price: 3000,
+          early_discount: 500,
+          level: "Beginner",
           duration: "12 Weeks",
           status: "ACTIVE"
         }
@@ -48,7 +60,7 @@ export async function POST(req: Request) {
         data: {
           user_id: decoded.id,
           course_id: courseId,
-          amount: 544, // Hardcoded matching UI
+          amount: amountPaid,
           razorpay_order_id,
           razorpay_payment_id,
           razorpay_signature,

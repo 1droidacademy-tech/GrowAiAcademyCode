@@ -1,15 +1,22 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
-import EnrollButton from "./EnrollButton";
-import Image from "next/image";
 import { prisma } from "@/lib/prisma";
 import { verifyToken } from "@/lib/auth";
+import CheckoutSummary from "./CheckoutSummary";
+import Image from "next/image";
 
 export default async function CourseEnrollment({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = await params;
   const cookieStore = await cookies();
   const token = cookieStore.get("growaiedu_token")?.value;
   const isLoggedIn = !!token;
+
+  const course = await prisma.course.findUnique({
+    where: { id: resolvedParams.id }
+  });
+
+  const basePrice = course?.price || 3000;
+  const earlyDiscount = course?.early_discount || 500;
 
   let isEnrolled = false;
   if (isLoggedIn && token) {
@@ -45,11 +52,13 @@ export default async function CourseEnrollment({ params }: { params: Promise<{ i
           <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-100/50 rounded-full blur-3xl -translate-y-20 translate-x-20"></div>
           
           <h1 className="text-4xl font-bold tracking-tight mb-6 relative z-10 w-10/12">
-            Mastering Neural <span className="text-[#3F3EE8]">Architectures</span>
+            AI Essentials for <span className="text-[#3F3EE8]">School Students</span>
           </h1>
           
-          <p className="text-slate-600 text-lg leading-relaxed mb-10 w-11/12 relative z-10">
-            Journey through the deep layers of modern AI. Learn to build, optimize, and deploy transformers that redefine intelligence.
+          <p className="text-slate-600 text-lg leading-relaxed mb-10 w-11/12 relative z-10 whitespace-pre-line">
+            AI Essentials for School Students is a beginner-friendly course designed to introduce school students to the exciting world of Artificial Intelligence. Students will learn how AI works, explore popular AI tools, and complete fun hands-on activities that build creativity and future-ready skills.
+
+            No prior coding knowledge is required. This course makes AI simple, practical, and enjoyable.
           </p>
 
           <div className="flex flex-wrap gap-4 mb-10 relative z-10">
@@ -82,11 +91,36 @@ export default async function CourseEnrollment({ params }: { params: Promise<{ i
             </div>
           </div>
 
-          <div className="bg-white/60 backdrop-blur-md px-6 py-4 rounded-2xl shadow-sm border border-white flex justify-between items-center cursor-pointer hover:bg-white/80 transition-colors relative z-10 group">
+          <h2 className="text-xl font-bold text-slate-800 mb-6 relative z-10">What You'll Achieve</h2>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10 relative z-10">
+            {[
+              { icon: "💡", color: "text-blue-600 bg-blue-50", title: "AI Fundamentals", desc: "Understand what Artificial Intelligence is and how it functions from the ground up." },
+              { icon: "🌍", color: "text-teal-600 bg-teal-50", title: "Real-World Impact", desc: "Learn how AI is used in real life across industries like healthcare, finance, and tech." },
+              { icon: "🛠️", color: "text-indigo-600 bg-indigo-50", title: "Modern AI Toolset", desc: "Explore popular AI tools and platforms used by leading research labs and startups." },
+              { icon: "✨", color: "text-purple-600 bg-purple-50", title: "Content Synthesis", desc: "Master the ability to create high-quality content using generative AI technologies." },
+              { icon: "💬", color: "text-cyan-600 bg-cyan-50", title: "Prompt Engineering", desc: "Learn prompt writing skills to extract the best possible results from LLMs." },
+              { icon: "🚀", color: "text-rose-600 bg-rose-50", title: "Practical Projects", desc: "Complete mini AI projects that build a portfolio-ready body of work." },
+              { icon: "⚖️", color: "text-red-600 bg-red-50", title: "Ethical Frameworks", desc: "Understand responsible AI usage and the ethical implications of automation." },
+              { icon: "💼", color: "text-emerald-600 bg-emerald-50", title: "Career Development", desc: "Gain awareness about AI careers and navigating the evolving job market." }
+            ].map((item, i) => (
+              <div key={i} className="bg-white/80 backdrop-blur-md p-5 rounded-2xl shadow-sm border border-slate-50 flex items-start gap-4">
+                <div className={`w-10 h-10 shrink-0 ${item.color} rounded-full flex items-center justify-center text-lg`}>
+                  {item.icon}
+                </div>
+                <div>
+                  <div className="font-bold text-slate-800 text-sm mb-1">{item.title}</div>
+                  <div className="text-xs text-slate-500 leading-relaxed font-medium">{item.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="bg-slate-100/50 backdrop-blur-md px-6 py-5 rounded-2xl shadow-sm border border-white flex justify-between items-center cursor-pointer hover:bg-slate-100 transition-colors relative z-10 group">
              <div className="flex items-center gap-4">
-               <div className="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center">📚</div>
+               <div className="w-10 h-10 bg-indigo-100/50 text-indigo-600 rounded-full flex items-center justify-center">📚</div>
                <div>
-                 <div className="font-bold text-sm">Curriculum Access</div>
+                 <div className="font-bold text-slate-800 text-sm">Curriculum Access</div>
                  <div className="text-xs text-slate-500 font-medium tracking-wide">Instant access to 48 modules</div>
                </div>
              </div>
@@ -96,7 +130,7 @@ export default async function CourseEnrollment({ params }: { params: Promise<{ i
 
         {/* Right Side: Summary Block */}
         {isEnrolled ? (
-           <div className="bg-white p-10 rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/40 text-center flex flex-col justify-center items-center h-full">
+           <div className="bg-white p-10 rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/40 text-center flex flex-col justify-center items-center">
              <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-4xl mb-6">🎉</div>
              <h2 className="text-2xl font-bold text-slate-800 mb-2">You're Enrolled!</h2>
              <p className="text-slate-500 mb-8 max-w-sm">You have full access to this course. Let's start building the future together.</p>
@@ -107,48 +141,12 @@ export default async function CourseEnrollment({ params }: { params: Promise<{ i
              </Link>
            </div>
         ) : (
-           <div className="bg-white p-10 rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/40">
-              <h2 className="text-xl font-bold text-slate-800 mb-8">Enrollment Summary</h2>
-              
-              <div className="space-y-4 text-sm font-medium border-b border-slate-100 pb-6 mb-6">
-                 <div className="flex justify-between items-center">
-                    <span className="text-slate-500">Base Tuition</span>
-                    <span className="text-slate-800 font-bold">₹599.00</span>
-                 </div>
-                 <div className="flex justify-between items-center">
-                    <span className="text-slate-500">Cloud Lab Credits</span>
-                    <span className="text-slate-800 font-bold">₹45.00</span>
-                 </div>
-                 <div className="flex justify-between items-center">
-                    <span className="text-slate-500">Early Access Discount</span>
-                    <span className="text-indigo-600 font-bold">-₹100.00</span>
-                 </div>
-              </div>
-
-              <div className="flex justify-between items-end mb-10 text-slate-800">
-                 <div className="text-xs font-bold text-slate-400 uppercase tracking-widest">Total Amount</div>
-                 <div className="flex items-center gap-3">
-                    <div className="text-4xl font-extrabold tracking-tight">₹544.00</div>
-                    <div className="bg-cyan-100 text-cyan-700 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest leading-none mb-1">Lifetime</div>
-                 </div>
-              </div>
-
-              <div className="space-y-4 mb-8">
-                <label className="flex items-start gap-4 p-5 rounded-2xl border-2 border-indigo-500 bg-indigo-50 cursor-pointer transition-colors relative overflow-hidden">
-                  <input type="radio" name="paymentType" value="onetime" defaultChecked className="mt-1 w-5 h-5 accent-indigo-600" />
-                  <div>
-                     <div className="font-bold text-slate-900">One-time Payment</div>
-                     <div className="text-xs text-slate-500 mt-0.5">Full access immediately</div>
-                  </div>
-                </label>
-              </div>
-
-              <EnrollButton courseId={resolvedParams.id} isLoggedIn={isLoggedIn} />
-              
-              <div className="mt-4 flex justify-center text-xs font-medium text-slate-400">
-                🔒 Encrypted secure 256-bit checkout by Razorpay
-              </div>
-           </div>
+           <CheckoutSummary 
+             courseId={resolvedParams.id}
+             isLoggedIn={isLoggedIn}
+             basePrice={basePrice}
+             earlyDiscount={earlyDiscount}
+           />
         )}
 
       </div>

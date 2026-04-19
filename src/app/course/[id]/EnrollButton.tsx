@@ -7,9 +7,10 @@ import Script from "next/script";
 interface EnrollButtonProps {
   courseId: string;
   isLoggedIn: boolean;
+  promoCode?: string;
 }
 
-export default function EnrollButton({ courseId, isLoggedIn }: EnrollButtonProps) {
+export default function EnrollButton({ courseId, isLoggedIn, promoCode }: EnrollButtonProps) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -26,7 +27,7 @@ export default function EnrollButton({ courseId, isLoggedIn }: EnrollButtonProps
       const orderRes = await fetch("/api/payments/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ courseId }),
+        body: JSON.stringify({ courseId, promoCode }),
       });
 
       if (!orderRes.ok) {

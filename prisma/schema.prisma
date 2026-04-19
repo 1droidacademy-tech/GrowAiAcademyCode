@@ -37,17 +37,28 @@ model User {
 }
 
 model Course {
-  id          String   @id @default(uuid())
-  title       String
-  description String
-  price       Float
-  level       String
-  duration    String
-  status      String   @default("ACTIVE") // ACTIVE, DRAFT, ARCHIVED
-  created_at  DateTime @default(now())
+  id             String   @id @default(uuid())
+  title          String
+  description    String
+  price          Float
+  early_discount Float    @default(0)
+  level          String
+  duration       String
+  status         String   @default("ACTIVE") // ACTIVE, DRAFT, ARCHIVED
+  created_at     DateTime @default(now())
 
   enrollments Enrollment[]
   payments    Payment[]
+
+  @@schema("growaiedu")
+}
+
+model PromoCode {
+  id         String   @id @default(uuid())
+  code       String   @unique
+  discount   Float
+  is_active  Boolean  @default(true)
+  created_at DateTime @default(now())
 
   @@schema("growaiedu")
 }

@@ -9,14 +9,38 @@ const razorpay = new Razorpay({
 
 export async function POST(req: Request) {
   try {
-    const { courseId } = await req.json();
+    const { courseId, promoCode } = await req.json();
 
     if (!courseId) {
        return NextResponse.json({ message: "Course ID is required" }, { status: 400 });
     }
 
-    // Amount in paisa for INR (e.g., ₹544.00)
-    const amountInPaisa = 54400; 
+    // Fetch dynamic course data
+    const course = await prisma.course.findUnique({
+      where: { id: courseId }
+    });
+
+    if (!course) {
+      return NextResponse.json({ message: "Course not found" }, { status: 404 });
+    }
+
+    let finalAmount = course.price - course.early_discount;
+
+    // Apply promo code if provided
+    if (promoCode) {
+      const promo = await prisma.promoCode.findUnique({
+        where: { code: promoCode.toUpperCase().trim(), is_active: true }
+      });
+      if (promo) {
+        finalAmount -= promo.discount;
+      }
+    }
+
+    // Safety check: ensure amount isn't negative
+    if (finalAmount < 0) finalAmount = 0;
+
+    // Amount in paisa for INR (e.g., ₹2500.00 -> 250000)
+    const amountInPaisa = Math.round(finalAmount * 100); 
 
     const options = {
       amount: amountInPaisa,

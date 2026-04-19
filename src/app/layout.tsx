@@ -43,6 +43,7 @@ export default async function RootLayout({
             </Link>
 
             <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+              <Link href="/" className="hover:text-indigo-600 transition-colors">Home</Link>
               <Link href="/course/ai-bootcamp" className="hover:text-indigo-600 transition-colors">Curriculum</Link>
               <Link href="/contact" className="hover:text-indigo-600 transition-colors">Contact</Link>
             </div>
