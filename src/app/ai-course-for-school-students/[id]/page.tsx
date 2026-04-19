@@ -13,8 +13,8 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   });
 
   return {
-    title: `Learn AI: ${course?.title || "AI Essentials"}`,
-    description: `Master AI Tools with our beginner-friendly course. ${course?.description.slice(0, 150)}...`,
+    title: `About ${course?.title || "AI Course"} | AI Training for School Students India`,
+    description: `Beginner friendly AI training for school students in India. Master ${course?.title} with GrowAiEdu live online classes.`,
   }
 }
 
@@ -65,7 +65,7 @@ export default async function CourseEnrollment({ params }: { params: Promise<{ i
           <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-100/50 rounded-full blur-3xl -translate-y-20 translate-x-20"></div>
           
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-6 relative z-10 w-full md:w-10/12">
-            AI Essentials for <span className="text-[#3F3EE8]">School Students</span>
+            AI course for school students learning artificial intelligence online
           </h1>
           
           <p className="text-slate-600 text-sm md:text-lg leading-relaxed mb-10 w-full md:w-11/12 relative z-10 whitespace-pre-line">
@@ -95,7 +95,7 @@ export default async function CourseEnrollment({ params }: { params: Promise<{ i
           <div className="mb-10 relative z-10">
             <div className="flex items-center gap-4">
                <div className="w-12 h-12 bg-slate-200 rounded-full overflow-hidden relative border-2 border-white shadow-sm">
-                 <Image src="/hero_students.png" alt="Bharathi, Lead AI Mentor at GrowAiEdu" fill className="object-cover" />
+                 <Image src="/ai-course-students-india.png" alt="Bharathi, Lead AI Mentor at GrowAiEdu India" fill className="object-cover" />
                </div>
                <div>
                  <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">Lead Mentor</div>

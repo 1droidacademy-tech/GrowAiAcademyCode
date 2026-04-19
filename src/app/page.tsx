@@ -13,16 +13,16 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20">
         <div className="flex-1 space-y-8">
           <div className="inline-block px-4 py-2 bg-cyan-100 text-cyan-600 rounded-full text-sm font-semibold tracking-wide uppercase shadow-sm">
-            Future-Ready Education
+            Future-Ready Education India
           </div>
           <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight leading-tight">
-            Crafting the next generation of <span className="gradient-text">AI Architects</span>.
+            The Best <span className="gradient-text">AI Course for School Students</span> in India.
           </h1>
           <p className="text-lg lg:text-xl text-slate-600 leading-relaxed max-w-2xl">
-            At GrowAiEdu, we believe artificial intelligence is the canvas of the 21st century. We're here to provide the brushes, the paint, and the inspiration for young minds to create the impossible.
+            Learn Artificial Intelligence with our beginner friendly live online AI course for school students. Explore AI tools, projects and future skills with GrowAiEdu.
           </p>
           <div className="pt-4">
-            <Link href="/course/ai-bootcamp">
+            <Link href="/ai-course-for-school-students/ai-bootcamp">
               <button className="bg-[#6C63FF] hover:bg-indigo-600 transition-colors text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-indigo-500/30 flex items-center gap-2 group">
                 Join the Mission
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
@@ -32,8 +32,8 @@ export default function Home() {
         </div>
         <div className="flex-1 relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl ring-1 ring-slate-900/5 rotate-2 hover:rotate-0 transition-transform duration-500">
           <Image 
-            src="/hero_students.png" 
-            alt="School students collaborating on AI projects at GrowAiEdu" 
+            src="/ai-course-students-india.png" 
+            alt="AI course for school students learning artificial intelligence online" 
             fill
             className="object-cover"
             priority
@@ -77,14 +77,14 @@ export default function Home() {
           <div className="absolute top-10 right-10 w-32 h-32 border-[20px] border-white/10 rounded-full blur-sm"></div>
           <h3 className="text-3xl font-bold mb-6 relative z-10">Our Vision</h3>
           <p className="text-xl text-white/90 italic font-medium leading-relaxed relative z-10">
-            "To be the launchpad for the next wave of creative engineers who see AI not as a replacement, but as a superpower."
+            "To be the launchpad for the next wave of creative engineers who see AI not as a superpower."
           </p>
         </div>
 
         {/* Why AI Now? */}
         <div className="bg-indigo-50/50 rounded-[2rem] p-10 border border-indigo-100 flex flex-col justify-between">
           <div>
-            <h3 className="text-xl font-bold text-indigo-900 mb-4">Why AI Now?</h3>
+            <h3 className="text-xl font-bold text-indigo-900 mb-4">Online AI Course for Students India</h3>
             <p className="text-indigo-900/70 text-sm leading-relaxed mb-6">
               The job market is shifting. AI education isn't just about coding; it's about critical thinking, data literacy, and understanding the systems that shape our world.
             </p>
@@ -104,8 +104,8 @@ export default function Home() {
           </div>
           <div className="flex-1 w-full relative h-[300px] md:h-auto md:min-h-[250px] rounded-[1.5rem] overflow-hidden bg-slate-900">
              <Image 
-              src="/abstract_curves.png" 
-              alt="Visualization of creative data flowing through AI models" 
+              src="/learn-ai-online-course.png" 
+              alt="Artificial intelligence course for kids India learning AI tools" 
               fill
               className="object-cover"
             />
@@ -116,10 +116,10 @@ export default function Home() {
       {/* Beginner Friendly Section */}
       <section className="max-w-4xl mx-auto px-6 mt-32 text-center text-slate-800">
         <h2 className="text-4xl lg:text-5xl font-bold tracking-tight mb-8">
-          Beginner-Friendly. <span className="text-indigo-600">Future-Focused.</span>
+          Beginner-Friendly AI Course. <span className="text-indigo-600">Future-Focused.</span>
         </h2>
         <p className="text-lg text-slate-600">
-          We've spent years refining our curriculum to ensure that even a complete novice can go from "Zero" to "AI Developer" without the friction of traditional academic gatekeeping.
+          We've spent years refining our curriculum to ensure that even a complete novice can go from "Zero" to "AI Developer" with our AI course without coding India.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 text-left">
@@ -134,15 +134,15 @@ export default function Home() {
             <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center text-2xl text-blue-500 mb-2">
               💬
             </div>
-            <h4 className="text-xl font-bold">Mentor Support</h4>
-            <p className="text-slate-500 text-sm">Real-time feedback from industry professionals who have worked at top-tier tech firms.</p>
+            <h4 className="text-xl font-bold">Live AI Classes</h4>
+            <p className="text-slate-500 text-sm">Real-time feedback from industry professionals who have worked at top-tier tech firms through our live AI classes for kids India.</p>
           </div>
           <div className="flex flex-col items-center text-center p-6 space-y-4">
             <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center text-2xl text-purple-500 mb-2">
               🎨
             </div>
-            <h4 className="text-xl font-bold">Creative Freedom</h4>
-            <p className="text-slate-500 text-sm">Project-based assessment where your grade is determined by the impact and creativity of you build.</p>
+            <h4 className="text-xl font-bold">AI Certification</h4>
+            <p className="text-slate-500 text-sm">Earn your AI certification for students India by completing impact-driven creative projects.</p>
           </div>
         </div>
       </section>
@@ -152,17 +152,17 @@ export default function Home() {
          <div className="bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-[3rem] p-16 text-center shadow-2xl relative overflow-hidden">
             <div className="absolute inset-0 bg-white/5 opacity-10"></div>
             <div className="relative z-10 space-y-8">
-              <h2 className="text-4xl lg:text-5xl font-bold text-white">Ready to start your journey?</h2>
+              <h2 className="text-4xl lg:text-5xl font-bold text-white">Join the best AI training for school students India.</h2>
               <p className="text-indigo-100 text-lg max-w-2xl mx-auto">
-                Join thousands of students building the future today with GrowAiEdu.
+                Join thousands of students building the future today with GrowAiEdu – the premier learn AI for beginners India destination.
               </p>
               <div className="flex justify-center gap-4 pt-4">
-                <Link href="/course/ai-bootcamp">
+                <Link href="/ai-course-for-school-students/ai-bootcamp">
                   <button className="bg-white text-indigo-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-slate-50 transition-colors shadow-lg">
                     Enroll Now
                   </button>
                 </Link>
-                <Link href="/course/ai-bootcamp">
+                <Link href="/ai-course-for-school-students/ai-bootcamp">
                   <button className="bg-indigo-800/40 text-white px-8 py-4 rounded-full font-bold text-lg border border-indigo-400 hover:bg-indigo-800/60 transition-colors">
                     View Curriculum
                   </button>

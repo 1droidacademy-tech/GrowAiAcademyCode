@@ -24,8 +24,8 @@ export default function Navbar({ user }: NavbarProps) {
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
           <Link href="/" className="hover:text-indigo-600 transition-colors">Home</Link>
-          <Link href="/course/ai-bootcamp" className="hover:text-indigo-600 transition-colors">Curriculum</Link>
-          <Link href="/contact" className="hover:text-indigo-600 transition-colors">Contact</Link>
+          <Link href="/ai-course-for-school-students/ai-bootcamp" className="hover:text-indigo-600 transition-colors">Curriculum</Link>
+          <Link href="/contact-ai-course" className="hover:text-indigo-600 transition-colors">Contact</Link>
         </div>
 
         <div className="flex items-center gap-4">
@@ -82,14 +82,14 @@ export default function Navbar({ user }: NavbarProps) {
             Home
           </Link>
           <Link 
-            href="/course/ai-bootcamp" 
+            href="/ai-course-for-school-students/ai-bootcamp" 
             className="text-lg font-bold text-slate-800"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Curriculum
           </Link>
           <Link 
-            href="/contact" 
+            href="/contact-ai-course" 
             className="text-lg font-bold text-slate-800"
             onClick={() => setIsMobileMenuOpen(false)}
           >

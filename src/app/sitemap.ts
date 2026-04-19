@@ -11,7 +11,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   })
  
   const courseSitemaps = courses.map((course) => ({
-    url: `${baseUrl}/course/${course.id}`,
+    url: `${baseUrl}/ai-course-for-school-students/${course.id}`,
     lastModified: course.created_at,
     changeFrequency: 'weekly' as const,
     priority: 0.8,
@@ -25,7 +25,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
     },
     {
-      url: `${baseUrl}/contact`,
+      url: `${baseUrl}/contact-ai-course`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.5,

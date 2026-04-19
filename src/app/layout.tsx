@@ -15,11 +15,22 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "GrowAiEdu | Live Online AI Course for School Students",
+    default: "AI Essentials for School Students | Online AI Course India | GrowAiEdu",
     template: "%s | GrowAiEdu"
   },
-  description: "Learn Artificial Intelligence with our beginner friendly live online AI course for school students. Explore AI tools, projects and future skills with GrowAiEdu.",
-  keywords: ["Artificial Intelligence", "AI Course", "School Students", "Live Online Course", "AI Tools", "GrowAiEdu", "AI Projects", "Future Skills"],
+  description: "Beginner friendly AI course for school students in India. Learn Artificial Intelligence, AI tools, and future skills with GrowAiEdu live online training.",
+  keywords: [
+    "AI course for school students India",
+    "Artificial Intelligence course for kids India",
+    "beginner AI course India",
+    "online AI course for students India",
+    "AI course without coding India",
+    "live AI classes for kids India",
+    "AI certification for students India",
+    "AI training for school students India",
+    "learn AI for beginners India",
+    "future skills AI course India"
+  ],
   authors: [{ name: "GrowAiEdu Team" }],
   creator: "GrowAiEdu",
   publisher: "GrowAiEdu",
@@ -27,21 +38,21 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
     url: "https://growaiedu.com",
-    title: "GrowAiEdu | Live Online AI Course for School Students",
-    description: "Learn Artificial Intelligence with our beginner friendly live online AI course for school students.",
+    title: "AI Essentials for School Students | Online AI Course India | GrowAiEdu",
+    description: "Beginner friendly AI course for school students in India. Learn Artificial Intelligence, AI tools, and future skills with GrowAiEdu.",
     siteName: "GrowAiEdu",
     images: [{
-      url: "/hero_students.png",
+      url: "/ai-course-students-india.png",
       width: 1200,
       height: 630,
-      alt: "GrowAiEdu AI Learning Platform"
+      alt: "AI course for school students learning artificial intelligence online"
     }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "GrowAiEdu | Live Online AI Course for School Students",
-    description: "Explore AI tools, projects and future skills with GrowAiEdu.",
-    images: ["/hero_students.png"],
+    title: "GrowAiEdu | AI Training for School Students India",
+    description: "Learn Artificial Intelligence, AI tools, and future skills with GrowAiEdu.",
+    images: ["/ai-course-students-india.png"],
   },
   robots: {
     index: true,
