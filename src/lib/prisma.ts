@@ -5,12 +5,6 @@ import pg from "pg";
 const connectionString = process.env.DATABASE_URL;
 
 const pool = new pg.Pool({ connectionString });
-
-// Ensure we are using the correct schema in the pool
-pool.on("connect", (client) => {
-  client.query("SET search_path TO growaiedu");
-});
-
 const adapter = new PrismaPg(pool);
 
 const globalForPrisma = globalThis as unknown as {

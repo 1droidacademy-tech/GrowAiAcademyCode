@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 import AdminPricingManager from "@/components/AdminPricingManager";
 import AdminPromoManager from "@/components/AdminPromoManager";
+import AdminContactMessages from "@/components/AdminContactMessages";
 
 export default async function AdminDashboard() {
   const cookieStore = await cookies();
@@ -215,6 +216,9 @@ export default async function AdminDashboard() {
 
            {/* Side Stack */}
            <div className="space-y-8">
+              {/* Contact Inquiries Inbox */}
+              <AdminContactMessages />
+
               {/* Pricing Management */}
               <AdminPricingManager />
 

@@ -42,24 +42,24 @@ export default function CheckoutSummary({ courseId, isLoggedIn, basePrice, early
   const total = basePrice - earlyDiscount - (appliedPromo?.discount || 0);
 
   return (
-    <div className="bg-white p-10 rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/40">
+    <div className="bg-white p-6 md:p-10 rounded-[1.5rem] md:rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/40">
       <h2 className="text-xl font-bold text-slate-800 mb-8">Enrollment Summary</h2>
       
       <div className="space-y-4 text-sm font-medium border-b border-slate-100 pb-6 mb-6">
         <div className="flex justify-between items-center">
             <span className="text-slate-500">Base Tuition</span>
-            <span className="text-slate-800 font-bold">₹{basePrice.toLocaleString()}.00</span>
+            <span className="text-slate-800 font-bold">₹{basePrice.toLocaleString()}</span>
         </div>
         {earlyDiscount > 0 && (
           <div className="flex justify-between items-center">
               <span className="text-slate-500">Early Access Discount</span>
-              <span className="text-indigo-600 font-bold">-₹{earlyDiscount.toLocaleString()}.00</span>
+              <span className="text-indigo-600 font-bold">-₹{earlyDiscount.toLocaleString()}</span>
           </div>
         )}
         {appliedPromo && (
           <div className="flex justify-between items-center bg-emerald-50 p-2 rounded-lg border border-emerald-100">
               <span className="text-emerald-700 font-bold">Promo: {appliedPromo.code}</span>
-              <span className="text-emerald-700 font-bold">-₹{appliedPromo.discount.toLocaleString()}.00</span>
+              <span className="text-emerald-700 font-bold">-₹{appliedPromo.discount.toLocaleString()}</span>
           </div>
         )}
       </div>
@@ -67,7 +67,7 @@ export default function CheckoutSummary({ courseId, isLoggedIn, basePrice, early
       <div className="flex justify-between items-end mb-8 text-slate-800">
           <div className="text-xs font-bold text-slate-400 uppercase tracking-widest">Total Amount</div>
           <div className="flex items-center gap-3">
-            <div className="text-4xl font-extrabold tracking-tight">₹{Math.max(0, total).toLocaleString()}.00</div>
+            <div className="text-4xl font-extrabold tracking-tight">₹{Math.max(0, total).toLocaleString()}</div>
             <div className="bg-cyan-100 text-cyan-700 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest leading-none mb-1">Lifetime</div>
           </div>
       </div>

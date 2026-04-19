@@ -6,6 +6,7 @@ import Image from "next/image";
 import { cookies } from "next/headers";
 import { verifyToken } from "@/lib/auth";
 import UserMenu from "@/components/UserMenu";
+import Navbar from "@/components/Navbar";
 
 const inter = Inter({
   variable: "--font-family-sans",
@@ -13,8 +14,39 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "GrowAiEdu",
-  description: "Crafting the next generation of AI Architects.",
+  title: {
+    default: "GrowAiEdu | Live Online AI Course for School Students",
+    template: "%s | GrowAiEdu"
+  },
+  description: "Learn Artificial Intelligence with our beginner friendly live online AI course for school students. Explore AI tools, projects and future skills with GrowAiEdu.",
+  keywords: ["Artificial Intelligence", "AI Course", "School Students", "Live Online Course", "AI Tools", "GrowAiEdu", "AI Projects", "Future Skills"],
+  authors: [{ name: "GrowAiEdu Team" }],
+  creator: "GrowAiEdu",
+  publisher: "GrowAiEdu",
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: "https://growaiedu.com",
+    title: "GrowAiEdu | Live Online AI Course for School Students",
+    description: "Learn Artificial Intelligence with our beginner friendly live online AI course for school students.",
+    siteName: "GrowAiEdu",
+    images: [{
+      url: "/hero_students.png",
+      width: 1200,
+      height: 630,
+      alt: "GrowAiEdu AI Learning Platform"
+    }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "GrowAiEdu | Live Online AI Course for School Students",
+    description: "Explore AI tools, projects and future skills with GrowAiEdu.",
+    images: ["/hero_students.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  }
 };
 
 export default async function RootLayout({
@@ -31,51 +63,10 @@ export default async function RootLayout({
       lang="en"
       className={`${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">
+      <body className="min-h-full flex flex-col font-sans text-slate-900 group/body">
         
         {/* Universal Navigation */}
-        <nav className="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
-          <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="relative w-40 h-10 overflow-hidden">
-                <Image src="/logo.png" alt="GrowAiEdu Logo" fill className="object-contain" />
-              </div>
-            </Link>
-
-            <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
-              <Link href="/" className="hover:text-indigo-600 transition-colors">Home</Link>
-              <Link href="/course/ai-bootcamp" className="hover:text-indigo-600 transition-colors">Curriculum</Link>
-              <Link href="/contact" className="hover:text-indigo-600 transition-colors">Contact</Link>
-            </div>
-
-            <div className="flex items-center gap-4">
-              {user ? (
-                <div className="flex items-center gap-6">
-                  <Link 
-                    href={user.role === "ADMIN" ? "/admin-dashboard" : "/student-dashboard"}
-                    className="hidden md:block text-sm font-bold text-slate-600 hover:text-indigo-600 transition-colors"
-                  >
-                    Dashboard
-                  </Link>
-                  <UserMenu user={user} />
-                </div>
-              ) : (
-                <>
-                  <Link href="/login">
-                    <button className="text-sm font-bold text-slate-600 hover:text-indigo-600 transition-colors px-4 py-2">
-                      Sign In
-                    </button>
-                  </Link>
-                  <Link href="/signup">
-                    <button className="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-full text-sm font-bold transition-colors shadow-sm">
-                      Get Started
-                    </button>
-                  </Link>
-                </>
-              )}
-            </div>
-          </div>
-        </nav>
+        <Navbar user={user} />
 
         <div className="flex-1">{children}</div>
       </body>

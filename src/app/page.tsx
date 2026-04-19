@@ -33,7 +33,7 @@ export default function Home() {
         <div className="flex-1 relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl ring-1 ring-slate-900/5 rotate-2 hover:rotate-0 transition-transform duration-500">
           <Image 
             src="/hero_students.png" 
-            alt="Students collaborating" 
+            alt="School students collaborating on AI projects at GrowAiEdu" 
             fill
             className="object-cover"
             priority
@@ -105,7 +105,7 @@ export default function Home() {
           <div className="flex-1 w-full relative h-[300px] md:h-auto md:min-h-[250px] rounded-[1.5rem] overflow-hidden bg-slate-900">
              <Image 
               src="/abstract_curves.png" 
-              alt="Creative Data flowing" 
+              alt="Visualization of creative data flowing through AI models" 
               fill
               className="object-cover"
             />

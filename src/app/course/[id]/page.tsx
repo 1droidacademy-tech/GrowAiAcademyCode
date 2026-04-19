@@ -4,6 +4,19 @@ import { prisma } from "@/lib/prisma";
 import { verifyToken } from "@/lib/auth";
 import CheckoutSummary from "./CheckoutSummary";
 import Image from "next/image";
+import { Metadata } from 'next'
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const course = await prisma.course.findUnique({
+    where: { id: resolvedParams.id }
+  });
+
+  return {
+    title: `Learn AI: ${course?.title || "AI Essentials"}`,
+    description: `Master AI Tools with our beginner-friendly course. ${course?.description.slice(0, 150)}...`,
+  }
+}
 
 export default async function CourseEnrollment({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = await params;
@@ -35,54 +48,54 @@ export default async function CourseEnrollment({ params }: { params: Promise<{ i
     <main className="min-h-screen bg-[#F8FAFC] font-sans pb-20 pt-24 px-6 text-slate-800">
       
       {/* Top Banner Progress step (Mock UI) */}
-      <div className="flex justify-center mb-12">
-        <div className="flex items-center gap-4 bg-white px-8 py-3 rounded-full shadow-sm border border-slate-100 italic text-sm font-semibold tracking-wide">
-          <div className="flex items-center gap-2"><span className="w-6 h-6 rounded-full bg-indigo-500 text-white flex items-center justify-center not-italic">1</span> Summary</div>
-          <div className="w-8 h-[2px] bg-slate-200"></div>
-          <div className="flex items-center gap-2 text-slate-400"><span className="w-6 h-6 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center not-italic">2</span> Payment</div>
-          <div className="w-8 h-[2px] bg-slate-200"></div>
-          <div className="flex items-center gap-2 text-slate-400"><span className="w-6 h-6 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center not-italic">3</span> Success</div>
+      <div className="flex justify-center mb-8 md:mb-12">
+        <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 bg-white px-6 md:px-8 py-3 md:py-3 rounded-2xl md:rounded-full shadow-sm border border-slate-100 italic text-xs md:text-sm font-semibold tracking-wide w-full md:w-auto">
+          <div className="flex items-center gap-2"><span className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-indigo-500 text-white flex items-center justify-center not-italic text-[10px] md:text-xs">1</span> Summary</div>
+          <div className="hidden md:block w-8 h-[2px] bg-slate-200"></div>
+          <div className="flex items-center gap-2 text-slate-400"><span className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center not-italic text-[10px] md:text-xs">2</span> Payment</div>
+          <div className="hidden md:block w-8 h-[2px] bg-slate-200"></div>
+          <div className="flex items-center gap-2 text-slate-400"><span className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center not-italic text-[10px] md:text-xs">3</span> Success</div>
         </div>
       </div>
 
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         
         {/* Left Side: Course Detail Block */}
-        <div className="bg-gradient-to-br from-indigo-50 to-white p-10 rounded-[2rem] border border-indigo-100 shadow-sm relative overflow-hidden">
+        <div className="bg-gradient-to-br from-indigo-50 to-white p-6 md:p-10 rounded-[1.5rem] md:rounded-[2rem] border border-indigo-100 shadow-sm relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-100/50 rounded-full blur-3xl -translate-y-20 translate-x-20"></div>
           
-          <h1 className="text-4xl font-bold tracking-tight mb-6 relative z-10 w-10/12">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-6 relative z-10 w-full md:w-10/12">
             AI Essentials for <span className="text-[#3F3EE8]">School Students</span>
           </h1>
           
-          <p className="text-slate-600 text-lg leading-relaxed mb-10 w-11/12 relative z-10 whitespace-pre-line">
+          <p className="text-slate-600 text-sm md:text-lg leading-relaxed mb-10 w-full md:w-11/12 relative z-10 whitespace-pre-line">
             AI Essentials for School Students is a beginner-friendly course designed to introduce school students to the exciting world of Artificial Intelligence. Students will learn how AI works, explore popular AI tools, and complete fun hands-on activities that build creativity and future-ready skills.
 
             No prior coding knowledge is required. This course makes AI simple, practical, and enjoyable.
           </p>
 
-          <div className="flex flex-wrap gap-4 mb-10 relative z-10">
-             <div className="bg-white px-6 py-4 rounded-2xl shadow-sm border border-slate-50 w-[140px]">
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-3 md:gap-4 mb-10 relative z-10">
+             <div className="bg-white px-4 md:px-6 py-4 rounded-2xl shadow-sm border border-slate-50">
                <div className="w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-xs mb-2">⏱</div>
                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Duration</div>
-               <div className="font-bold text-sm">12 Weeks</div>
+               <div className="font-bold text-xs md:text-sm">12 Weeks</div>
              </div>
-             <div className="bg-white px-6 py-4 rounded-2xl shadow-sm border border-slate-50 w-[140px]">
+             <div className="bg-white px-4 md:px-6 py-4 rounded-2xl shadow-sm border border-slate-50">
                <div className="w-6 h-6 bg-cyan-100 text-cyan-600 rounded-full flex items-center justify-center text-xs mb-2">🎓</div>
                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Level</div>
-               <div className="font-bold text-sm">Advanced</div>
+               <div className="font-bold text-xs md:text-sm">Advanced</div>
              </div>
-             <div className="bg-white px-6 py-4 rounded-2xl shadow-sm border border-slate-50 w-[140px]">
+             <div className="bg-white px-4 md:px-6 py-4 rounded-2xl shadow-sm border border-slate-50 col-span-2 sm:col-span-1">
                <div className="w-6 h-6 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-xs mb-2">🏅</div>
                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Credential</div>
-               <div className="font-bold text-sm">Verified</div>
+               <div className="font-bold text-xs md:text-sm">Verified</div>
              </div>
           </div>
 
           <div className="mb-10 relative z-10">
             <div className="flex items-center gap-4">
                <div className="w-12 h-12 bg-slate-200 rounded-full overflow-hidden relative border-2 border-white shadow-sm">
-                 <Image src="/hero_students.png" alt="Instructor" fill className="object-cover" />
+                 <Image src="/hero_students.png" alt="Bharathi, Lead AI Mentor at GrowAiEdu" fill className="object-cover" />
                </div>
                <div>
                  <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">Lead Mentor</div>
