@@ -134,7 +134,7 @@ export default async function CourseEnrollment({ params }: { params: Promise<{ i
                <div className="w-10 h-10 bg-indigo-100/50 text-indigo-600 rounded-full flex items-center justify-center">📚</div>
                <div>
                  <div className="font-bold text-slate-800 text-base">Curriculum Access</div>
-                 <div className="text-sm text-slate-500 font-medium tracking-wide">Instant access to 48 modules</div>
+                 <div className="text-sm text-slate-500 font-medium tracking-wide">Instant access to modules</div>
                </div>
              </div>
              <div className="text-slate-400 group-hover:translate-x-1 transition-transform">→</div>
