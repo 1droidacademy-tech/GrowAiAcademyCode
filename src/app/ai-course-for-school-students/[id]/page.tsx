@@ -68,7 +68,7 @@ export default async function CourseEnrollment({ params }: { params: Promise<{ i
             AI course for school students learning artificial intelligence online
           </h1>
           
-          <p className="text-slate-600 text-sm md:text-lg leading-relaxed mb-10 w-full md:w-11/12 relative z-10 whitespace-pre-line">
+          <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-10 w-full md:w-11/12 relative z-10 whitespace-pre-line">
             AI Essentials for School Students is a beginner-friendly course designed to introduce school students to the exciting world of Artificial Intelligence. Students will learn how AI works, explore popular AI tools, and complete fun hands-on activities that build creativity and future-ready skills.
 
             No prior coding knowledge is required. This course makes AI simple, practical, and enjoyable.
@@ -104,7 +104,7 @@ export default async function CourseEnrollment({ params }: { params: Promise<{ i
             </div>
           </div>
 
-          <h2 className="text-xl font-bold text-slate-800 mb-6 relative z-10">What You'll Achieve</h2>
+          <h2 className="text-2xl font-bold text-slate-800 mb-6 relative z-10">What You'll Achieve</h2>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10 relative z-10">
             {[
@@ -122,8 +122,8 @@ export default async function CourseEnrollment({ params }: { params: Promise<{ i
                   {item.icon}
                 </div>
                 <div>
-                  <div className="font-bold text-slate-800 text-sm mb-1">{item.title}</div>
-                  <div className="text-xs text-slate-500 leading-relaxed font-medium">{item.desc}</div>
+                  <div className="font-bold text-slate-800 text-base mb-1">{item.title}</div>
+                  <div className="text-sm text-slate-500 leading-relaxed font-medium">{item.desc}</div>
                 </div>
               </div>
             ))}
@@ -133,8 +133,8 @@ export default async function CourseEnrollment({ params }: { params: Promise<{ i
              <div className="flex items-center gap-4">
                <div className="w-10 h-10 bg-indigo-100/50 text-indigo-600 rounded-full flex items-center justify-center">📚</div>
                <div>
-                 <div className="font-bold text-slate-800 text-sm">Curriculum Access</div>
-                 <div className="text-xs text-slate-500 font-medium tracking-wide">Instant access to 48 modules</div>
+                 <div className="font-bold text-slate-800 text-base">Curriculum Access</div>
+                 <div className="text-sm text-slate-500 font-medium tracking-wide">Instant access to 48 modules</div>
                </div>
              </div>
              <div className="text-slate-400 group-hover:translate-x-1 transition-transform">→</div>
