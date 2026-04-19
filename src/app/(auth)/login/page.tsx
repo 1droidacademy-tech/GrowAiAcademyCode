@@ -36,6 +36,7 @@ export default function LoginPage() {
       }
 
       const data = await res.json();
+      router.refresh();
       if (data.user.role === "ADMIN") {
         router.push("/admin-dashboard");
       } else {

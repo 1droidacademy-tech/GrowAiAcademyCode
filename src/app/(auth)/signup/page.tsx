@@ -42,6 +42,7 @@ export default function SignupPage() {
         }
       }
 
+      router.refresh();
       router.push("/student-dashboard");
     } catch (err: any) {
       console.error("Signup error:", err);
@@ -55,7 +56,7 @@ export default function SignupPage() {
       
       {/* Left Side - Visual */}
       <div className="hidden lg:flex lg:w-5/12 relative flex-col justify-between text-white p-16">
-        <Image src="/bg_growaiedu.png" alt="GrowAiEdu Background" fill className="object-cover absolute inset-0 z-0 brightness-75" />
+        <Image src="/ai-training-students-india.png" alt="GrowAiEdu AI training background India" fill className="object-cover absolute inset-0 z-0 brightness-75" />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent z-0"></div>
         
         <div className="relative z-10 space-y-4">
@@ -87,7 +88,7 @@ export default function SignupPage() {
             <p className="italic text-slate-200 text-sm mb-4">"The curriculum feels like playing a high-end game where every level unlocks a real-world skill."</p>
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-indigo-500 overflow-hidden relative">
-                 <Image src="/hero_students.png" alt="User" fill className="object-cover" />
+                 <Image src="/ai-course-students-india.png" alt="Student project collaboration India" fill className="object-cover" />
               </div>
               <div className="text-sm text-cyan-400 font-medium">— Alex, 16</div>
             </div>
