@@ -12,14 +12,19 @@ export async function POST(req: Request) {
       return NextResponse.json({ message: "Missing required fields" }, { status: 400 });
     }
 
-    const existingUser = await prisma.user.findFirst({
-      where: {
-        OR: [{ email }, { phone }],
-      },
-    });
+    const phoneRegex = /^(?:\+91|91)?[6-9]\d{9}$/;
+    if (!phoneRegex.test(phone)) {
+      return NextResponse.json({ message: "Please enter a valid Indian phone number" }, { status: 400 });
+    }
 
-    if (existingUser) {
-      return NextResponse.json({ message: "User with this email or phone already exists" }, { status: 400 });
+    const existingEmail = await prisma.user.findFirst({ where: { email } });
+    if (existingEmail) {
+      return NextResponse.json({ message: "An account with this email already exists" }, { status: 400 });
+    }
+
+    const existingPhone = await prisma.user.findFirst({ where: { phone } });
+    if (existingPhone) {
+      return NextResponse.json({ message: "An account with this phone number already exists" }, { status: 400 });
     }
 
     const password_hash = await bcrypt.hash(password, 10);

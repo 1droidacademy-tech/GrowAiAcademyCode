@@ -31,6 +31,8 @@ model User {
   enrollments Enrollment[]
   payments    Payment[]
 
+  reset_tokens  PasswordResetToken[]
+
   @@schema("growaiedu")
 }
 
@@ -87,6 +89,17 @@ model ContactMessage {
   email      String
   phone      String
   message    String
+  created_at DateTime @default(now())
+
+  @@schema("growaiedu")
+}
+
+model PasswordResetToken {
+  id         String   @id @default(uuid())
+  token      String   @unique
+  user_id    String
+  user       User     @relation(fields: [user_id], references: [id])
+  expires_at DateTime
   created_at DateTime @default(now())
 
   @@schema("growaiedu")

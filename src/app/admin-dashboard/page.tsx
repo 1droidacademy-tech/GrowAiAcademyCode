@@ -173,11 +173,12 @@ export default async function AdminDashboard() {
                   <div className="col-span-1 text-right">Status</div>
                 </div>
 
-                {recentUsers.length === 0 && [
-                  {name: "Alex Rivera", course: "Neural Networks 101", status: "ACTIVE"},
-                  {name: "Sofia Chen", course: "Generative Art AI", status: "ACTIVE"},
-                  {name: "Marcus Thorne", course: "Advanced Python", status: "PENDING"},
-                ].map((user, i) => (
+                {recentUsers.length > 0 ? recentUsers.map((user, i) => {
+                   const hasCompletedEnrollment = user.enrollments.some((e: any) => e.payment_status === "COMPLETED");
+                   const statusText = hasCompletedEnrollment ? "ENROLLED" : "REGISTERED";
+                   const uiCourse = hasCompletedEnrollment ? user.enrollments.find((e: any) => e.payment_status === "COMPLETED")?.course.title : "No Course Selected";
+                   
+                   return (
                    <div key={i} className="grid grid-cols-4 items-center py-4 border-b border-slate-50 last:border-0">
                      <div className="col-span-1 flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-slate-200 overflow-hidden relative">
@@ -186,20 +187,27 @@ export default async function AdminDashboard() {
                         <span className="font-semibold text-slate-800">{user.name}</span>
                      </div>
                      <div className="col-span-1 text-slate-500 font-medium text-sm">
-                        {user.course}
+                        {uiCourse}
                      </div>
                      <div className="col-span-1">
                         <div className="w-full bg-slate-100 rounded-full h-1.5 flex overflow-hidden max-w-[120px]">
-                            <div className="bg-[#3F3EE8] h-full" style={{ width: Math.random() > 0.5 ? '70%' : '40%' }}></div>
+                            {hasCompletedEnrollment ? (
+                                <div className="bg-[#3F3EE8] h-full" style={{ width: '10%' }}></div>
+                            ) : (
+                                <div className="bg-slate-300 h-full" style={{ width: '0%' }}></div>
+                            )}
                         </div>
                      </div>
                      <div className="col-span-1 flex justify-end">
-                        <span className={`px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider ${user.status === 'ACTIVE' ? 'bg-[#E6F5F2] text-[#00A389]' : 'bg-slate-100 text-slate-500'}`}>
-                          {user.status}
+                        <span className={`px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider ${hasCompletedEnrollment ? 'bg-[#E6F5F2] text-[#00A389]' : 'bg-orange-50 text-orange-500'}`}>
+                          {statusText}
                         </span>
                      </div>
                    </div>
-                ))}
+                   );
+                }) : (
+                  <div className="py-8 text-center text-slate-400 font-medium text-sm">No students found yet.</div>
+                )}
              </div>
            </div>
 
