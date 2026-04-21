@@ -32,8 +32,8 @@ export default function Home() {
         </div>
         <div className="flex-1 relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl ring-1 ring-slate-900/5 rotate-2 hover:rotate-0 transition-transform duration-500">
           <Image 
-            src="/ai-course-students-india.png" 
-            alt="AI course for school students learning artificial intelligence online" 
+            src="/hero-indian-students.jpg" 
+            alt="AI course for school students learning artificial intelligence online in India" 
             fill
             className="object-cover"
             priority

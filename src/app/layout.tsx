@@ -42,17 +42,17 @@ export const metadata: Metadata = {
     description: "Beginner friendly AI course for school students in India. Learn Artificial Intelligence, AI tools, and future skills with GrowAiEdu.",
     siteName: "GrowAiEdu",
     images: [{
-      url: "/ai-course-students-india.png",
+      url: "/hero-indian-students.jpg",
       width: 1200,
       height: 630,
-      alt: "AI course for school students learning artificial intelligence online"
+      alt: "AI education for school students in India featuring Indian students"
     }],
   },
   twitter: {
     card: "summary_large_image",
     title: "GrowAiEdu | AI Training for School Students India",
     description: "Learn Artificial Intelligence, AI tools, and future skills with GrowAiEdu.",
-    images: ["/ai-course-students-india.png"],
+    images: ["/hero-indian-students.jpg"],
   },
   robots: {
     index: true,
