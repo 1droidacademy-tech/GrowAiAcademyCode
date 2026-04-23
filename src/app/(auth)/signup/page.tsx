@@ -194,7 +194,7 @@ export default function SignupPage() {
                  <div className="w-8 h-8 rounded-full bg-indigo-400 flex items-center border-[2px] border-white z-10"></div>
                  <div className="w-8 h-8 rounded-full bg-cyan-400 flex items-center border-[2px] border-white z-0"></div>
              </div>
-             <span>Join 15k+ students today</span>
+             <span>Join 500+ students today</span>
           </div>
         </div>
       </div>

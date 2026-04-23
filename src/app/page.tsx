@@ -124,30 +124,30 @@ export default function Home() {
 
         {/* Marquee effect */}
         <div className="flex flex-col gap-10">
-          <div className="flex animate-marquee space-x-12 whitespace-nowrap">
+          <div className="flex animate-marquee space-x-6 md:space-x-12 whitespace-nowrap">
             {[
               "ChatGPT", "Gemini", "NotebookLM", "Claude AI", "Heygen", 
               "Kling", "Google Veo", "Custom Gems", "Canva AI", "Midjourney",
               "ChatGPT", "Gemini", "NotebookLM", "Claude AI", "Heygen", 
               "Kling", "Google Veo", "Custom Gems", "Canva AI", "Midjourney"
             ].map((tool, index) => (
-              <div key={index} className="flex items-center gap-3 bg-white/5 backdrop-blur-sm border border-white/10 px-8 py-5 rounded-2xl">
-                <div className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]"></div>
-                <span className="text-2xl font-bold text-white tracking-wide">{tool}</span>
+              <div key={index} className="flex items-center gap-2 md:gap-3 bg-white/5 backdrop-blur-sm border border-white/10 px-4 py-3 md:px-8 md:py-5 rounded-xl md:rounded-2xl">
+                <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]"></div>
+                <span className="text-base md:text-2xl font-bold text-white tracking-wide">{tool}</span>
               </div>
             ))}
           </div>
           
-          <div className="flex animate-marquee-reverse space-x-12 whitespace-nowrap">
+          <div className="flex animate-marquee-reverse space-x-6 md:space-x-12 whitespace-nowrap">
             {[
               "Luma AI", "Replit", "ElevenLabs", "Suno", "Gamma", "Perplexity", 
               "Adobe Firefly", "Runway Gen-3", "Microsoft Copilot",
               "Luma AI", "Replit", "ElevenLabs", "Suno", "Gamma", "Perplexity", 
               "Adobe Firefly", "Runway Gen-3", "Microsoft Copilot"
             ].map((tool, index) => (
-              <div key={index} className="flex items-center gap-3 bg-white/5 backdrop-blur-sm border border-white/10 px-8 py-5 rounded-2xl">
-                <div className="w-2 h-2 rounded-full bg-indigo-400 shadow-[0_0_10px_#818cf8]"></div>
-                <span className="text-2xl font-bold text-white tracking-wide">{tool}</span>
+              <div key={index} className="flex items-center gap-2 md:gap-3 bg-white/5 backdrop-blur-sm border border-white/10 px-4 py-3 md:px-8 md:py-5 rounded-xl md:rounded-2xl">
+                <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-indigo-400 shadow-[0_0_10px_#818cf8]"></div>
+                <span className="text-base md:text-2xl font-bold text-white tracking-wide">{tool}</span>
               </div>
             ))}
           </div>
