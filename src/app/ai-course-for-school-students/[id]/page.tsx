@@ -4,13 +4,19 @@ import { prisma } from "@/lib/prisma";
 import { verifyToken } from "@/lib/auth";
 import CheckoutSummary from "./CheckoutSummary";
 import Image from "next/image";
-import { Metadata } from 'next'
+import { cache } from "react";
+import { Metadata } from "next";
+
+// Cache course fetch to deduplicate between metadata and page render
+const getCourse = cache(async (id: string) => {
+  return prisma.course.findUnique({
+    where: { id }
+  });
+});
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
-  const course = await prisma.course.findUnique({
-    where: { id: resolvedParams.id }
-  });
+  const course = await getCourse(resolvedParams.id);
 
   return {
     title: `About ${course?.title || "AI Course"} | AI Training for School Students India`,
@@ -24,12 +30,8 @@ export default async function CourseEnrollment({ params }: { params: Promise<{ i
   const token = cookieStore.get("growaiedu_token")?.value;
   const isLoggedIn = !!token;
 
-  const course = await prisma.course.findUnique({
-    where: { id: resolvedParams.id }
-  });
-
-  const basePrice = course?.price || 3000;
-  const earlyDiscount = course?.early_discount || 500;
+  // Start course fetch immediately
+  const coursePromise = getCourse(resolvedParams.id);
 
   let isEnrolled = false;
   if (isLoggedIn && token) {
@@ -43,6 +45,11 @@ export default async function CourseEnrollment({ params }: { params: Promise<{ i
         }
      }
   }
+
+  const course = await coursePromise;
+
+  const basePrice = course?.price || 3000;
+  const earlyDiscount = course?.early_discount || 500;
 
   return (
     <main className="min-h-screen bg-[#F8FAFC] font-sans pb-20 pt-24 px-6 text-slate-800">
