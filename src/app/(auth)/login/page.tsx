@@ -116,12 +116,19 @@ export default function LoginPage() {
                  />
               </div>
               <div className="space-y-1">
-                 <div className="flex justify-between items-center">
-                    <label className="text-xs font-bold text-slate-600">Password</label>
-                    <a href="#" className="flex-shrink-0 text-xs font-medium text-indigo-600 hover:text-indigo-500">Forgot?</a>
-                 </div>
-                 <input 
-                   type="password" required
+                  <div className="flex justify-between items-end">
+                    <label className="text-xs font-bold text-slate-600" htmlFor="password">Password</label>
+                    <Link 
+                      href="/forgot-password" 
+                      title="Go to forgot password page" 
+                      className="flex-shrink-0 text-xs font-bold text-indigo-600 hover:text-indigo-500 relative z-30 py-1 px-2 -mr-2 transition-colors inline-block"
+                    >
+                      Forgot Password?
+                    </Link>
+                  </div>
+                  <input 
+                    id="password"
+                    type="password" required
                    className="w-full bg-slate-100 rounded-xl px-4 py-4 bg-opacity-70 border-none focus:ring-2 focus:ring-indigo-500 font-medium tracking-widest" 
                    value={formData.password} onChange={(e) => setFormData({...formData, password: e.target.value})}
                  />

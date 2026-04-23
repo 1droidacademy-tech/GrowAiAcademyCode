@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { Resend } from "resend";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+import { resend, EMAIL_CONFIG } from "@/lib/email";
 
 export async function POST(req: Request) {
   try {
@@ -20,7 +18,7 @@ export async function POST(req: Request) {
     // Send email notification to admin
     try {
       await resend.emails.send({
-        from: "GrowAiEdu Contact <onboarding@resend.dev>",
+        from: `GrowAiEdu Contact <${EMAIL_CONFIG.from.split('<')[1].replace('>', '')}>`,
         to: "growaiadmin@gmail.com",
         replyTo: email,
         subject: `New Contact Message from ${name}`,

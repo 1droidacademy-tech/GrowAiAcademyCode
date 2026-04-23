@@ -148,21 +148,6 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
-              <div className="flex gap-4 items-center">
-                <div className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-400">
-                  <div className="flex gap-2 text-lg text-slate-600 font-mono tracking-widest font-bold">
-                    <span>X</span><span>D</span>
-                  </div>
-                </div>
-                <div>
-                  <div className="text-xs font-bold text-slate-500 uppercase tracking-widest">Social Channels</div>
-                  <div className="flex gap-3 text-slate-400 mt-1">
-                     <span>🌐</span>
-                     <span>＠</span>
-                     <span>👾</span>
-                  </div>
-                </div>
-              </div>
             </div>
 
             {/* Map Block */}
