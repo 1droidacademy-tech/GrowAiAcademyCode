@@ -53,7 +53,7 @@ export async function POST(req: Request) {
         console.error("Resend API Error details:", sendError);
         // During development, we can check if it's the "onboarding" restriction
         if (sendError.message.includes("onboarding")) {
-          console.warn("⚠️ FORGOT PASSWORD: You are using onboarding@resend.dev which only sends to your own Resend account email.");
+          console.warn("⚠️ FORGOT PASSWORD: Check if the sending domain is verified in your Resend account.");
         }
       } else {
         console.log(`Password reset email triggered successfully for: ${email}. ID: ${data?.id}`);

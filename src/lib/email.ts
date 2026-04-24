@@ -7,7 +7,7 @@ if (!process.env.RESEND_API_KEY) {
 export const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const EMAIL_CONFIG = {
-  from: "GrowAiEdu <onboarding@resend.dev>", // Fallback to onboarding@resend.dev if not verified
+  from: "GrowAiEdu <support@growaiedu.in>",
   supportEmail: "growaiadmin@gmail.com",
 };
 
