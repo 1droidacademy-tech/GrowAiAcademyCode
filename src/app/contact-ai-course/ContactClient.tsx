@@ -119,7 +119,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <div className="text-xs font-bold text-slate-500 uppercase tracking-widest">Email Us</div>
-                    <div className="font-bold text-slate-800">growaiadmin@gmail.com</div>
+                    <a href="mailto:growaiadmin@gmail.com" className="font-bold text-slate-800 hover:text-indigo-600 transition-colors">growaiadmin@gmail.com</a>
                   </div>
                 </div>
                 <div className="flex gap-4 items-center">
@@ -128,7 +128,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <div className="text-xs font-bold text-slate-500 uppercase tracking-widest">Call Us</div>
-                    <div className="font-bold text-slate-800">+91 7305478011</div>
+                    <a href="tel:+917806918011" className="font-bold text-slate-800 hover:text-indigo-600 transition-colors">+91 7806918011</a>
                   </div>
                 </div>
                 <div className="flex gap-4 items-center">
