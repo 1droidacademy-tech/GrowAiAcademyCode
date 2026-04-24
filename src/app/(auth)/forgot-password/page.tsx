@@ -41,7 +41,7 @@ export default function ForgotPasswordPage() {
       
       {/* Left Side - Visual */}
       <div className="hidden lg:flex lg:w-5/12 relative flex-col justify-between text-white p-16">
-        <Image src="/bg_growaiedu.png" alt="GrowAiEdu Background" fill className="object-cover absolute inset-0 z-0 brightness-75" />
+        <Image src="/ai-training-students-india.png" alt="GrowAiEdu Background" fill className="object-cover absolute inset-0 z-0 brightness-75" />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent z-0"></div>
         
         <div className="relative z-10 space-y-4">
