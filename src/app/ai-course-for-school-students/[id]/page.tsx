@@ -72,7 +72,7 @@ export default async function CourseEnrollment({ params }: { params: Promise<{ i
           <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-100/50 rounded-full blur-3xl -translate-y-20 translate-x-20"></div>
           
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-6 relative z-10 w-full md:w-10/12">
-            AI course for school students learning artificial intelligence online
+            AI Creator Pro for Students: From Beginner to Builder
           </h1>
           
           <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-10 w-full md:w-11/12 relative z-10 whitespace-pre-line">
@@ -115,6 +115,12 @@ export default async function CourseEnrollment({ params }: { params: Promise<{ i
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10 relative z-10">
             {[
+              { icon: "📱", color: "text-orange-600 bg-orange-50", title: "Build AI-Powered Apps", desc: "Create your own mini applications using AI tools—turning ideas into working solutions without coding." },
+              { icon: "🌐", color: "text-blue-600 bg-blue-50", title: "Design & Launch Websites", desc: "Build simple websites using AI assistance—learning how to present ideas online effectively." },
+              { icon: "🎨", color: "text-indigo-600 bg-indigo-50", title: "Professional AI Images", desc: "Generate high-quality visuals for projects, presentations, and creative ideas using advanced AI tools." },
+              { icon: "🎥", color: "text-purple-600 bg-purple-50", title: "AI Videos & Presentations", desc: "Create short videos and dynamic presentations using AI tools—combining visuals, scripts, and creativity." },
+              { icon: "📚", color: "text-emerald-600 bg-emerald-50", title: "Smart Study Guides", desc: "Turn chapters into simple notes, summaries, and revision guides using AI—helping you study faster and remember better." },
+              { icon: "🔍", color: "text-amber-600 bg-amber-50", title: "AI Research Mindset", desc: "Build critical thinking and research skills by learning how to ask better questions and explore topics deeply using AI." },
               { icon: "💡", color: "text-blue-600 bg-blue-50", title: "AI Fundamentals", desc: "Understand what Artificial Intelligence is and how it functions from the ground up." },
               { icon: "🌍", color: "text-teal-600 bg-teal-50", title: "Real-World Impact", desc: "Learn how AI is used in real life across industries like healthcare, finance, and tech." },
               { icon: "🛠️", color: "text-indigo-600 bg-indigo-50", title: "Modern AI Toolset", desc: "Explore popular AI tools and platforms used by leading research labs and startups." },
