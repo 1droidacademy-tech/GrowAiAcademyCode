@@ -85,7 +85,7 @@ export default async function CourseEnrollment({ params }: { params: Promise<{ i
              <div className="bg-white px-4 md:px-6 py-4 rounded-2xl shadow-sm border border-slate-50">
                <div className="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-lg mb-2">⏱</div>
                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Duration</div>
-               <div className="font-bold text-xs md:text-sm">2 Weeks</div>
+               <div className="font-bold text-xs md:text-sm">3 Weeks</div>
              </div>
              <div className="bg-white px-4 md:px-6 py-4 rounded-2xl shadow-sm border border-slate-50">
                <div className="w-10 h-10 bg-cyan-100 text-cyan-600 rounded-full flex items-center justify-center text-lg mb-2">🎓</div>

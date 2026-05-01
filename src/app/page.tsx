@@ -13,7 +13,7 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20">
         <div className="flex-1 space-y-8">
           <div className="inline-block px-4 py-2 bg-cyan-100 text-cyan-600 rounded-full text-sm font-semibold tracking-wide uppercase shadow-sm">
-            Future-Ready Education India
+            Future-Ready AI Education
           </div>
           <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight leading-tight">
             The Best <span className="gradient-text">AI Course for School Students</span> in India.
