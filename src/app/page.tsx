@@ -113,6 +113,103 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Key Benefits Section */}
+      <section className="max-w-7xl mx-auto px-6 lg:px-8 mt-32">
+        <div className="text-center mb-16">
+           <h2 className="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-6">
+             Empower Your Child for the <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-cyan-500">Future</span>
+           </h2>
+           <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+             Give your child the unfair advantage they need to thrive in an AI-first world.
+           </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {[
+            {
+              title: "Become a Creator",
+              desc: "Help your child become a creator, not just a consumer of technology.",
+              icon: "🎨",
+              color: "text-purple-600",
+              bg: "bg-purple-100"
+            },
+            {
+              title: "No-Code Development",
+              desc: "Your child can build mobile applications and websites without a single line of code.",
+              icon: "📱",
+              color: "text-blue-600",
+              bg: "bg-blue-100"
+            },
+            {
+              title: "Productive Screen Time",
+              desc: "Turn screen time into skill-building time.",
+              icon: "⏳",
+              color: "text-emerald-600",
+              bg: "bg-emerald-100"
+            },
+            {
+              title: "Beyond School",
+              desc: "Equip students with skills that schools don't teach.",
+              icon: "🚀",
+              color: "text-rose-600",
+              bg: "bg-rose-100"
+            }
+          ].map((benefit, i) => (
+            <div key={i} className="flex gap-6 p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 group">
+               <div className={`w-14 h-14 rounded-2xl ${benefit.bg} ${benefit.color} flex items-center justify-center text-2xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+                 {benefit.icon}
+               </div>
+               <div>
+                 <h4 className="text-xl font-bold text-slate-900 mb-2">{benefit.title}</h4>
+                 <p className="text-slate-600 leading-relaxed">{benefit.desc}</p>
+               </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* What Students Learn Section */}
+      <section className="max-w-7xl mx-auto px-6 lg:px-8 mt-32">
+        <div className="bg-slate-900 rounded-[3rem] p-10 lg:p-16 relative overflow-hidden shadow-2xl">
+          {/* Decorative background elements */}
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3"></div>
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-cyan-500/20 rounded-full blur-[80px] translate-y-1/3 -translate-x-1/3"></div>
+          
+          <div className="relative z-10">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
+                What Students <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400">Learn & Build</span>
+              </h2>
+              <p className="text-slate-300 text-lg max-w-2xl mx-auto">
+                A comprehensive hands-on curriculum designed to build real-world applications and future-proof skills.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                "Mobile Applications",
+                "Websites",
+                "AI powered smart applications",
+                "Learn practical AI tools used in real-world industries",
+                "Develop future-ready digital skills for tomorrow's careers",
+                "Boost creativity through AI-based design and content creation",
+                "Learn safe and responsible use of AI tools",
+                "Build confidence in technology, creativity, and problem-solving",
+                "Understand the fundamentals of Artificial Intelligence & future technologies",
+              ].map((item, i) => (
+                <div key={i} className="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-6 flex gap-4 hover:bg-white/10 hover:-translate-y-1 transition-all duration-300">
+                  <div className="text-cyan-400 shrink-0 mt-1">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  </div>
+                  <p className="text-white font-medium leading-relaxed text-sm md:text-base">{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* AI Tools Marquee Section */}
       <section className="mt-40 overflow-hidden py-20 bg-slate-900">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-12 text-center">
@@ -168,7 +265,7 @@ export default function Home() {
             <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center text-2xl text-indigo-600 mb-2">
               🎓
             </div>
-            <h4 className="text-xl font-bold">Scaffolded Learning</h4>
+            <h4 className="text-xl font-bold">Skill-Based Learning</h4>
             <p className="text-slate-500 text-sm">Complex concepts broken down into bite-sized, interactive modules that build confidence gradually.</p>
           </div>
           <div className="flex flex-col items-center text-center p-6 space-y-4">
@@ -176,7 +273,7 @@ export default function Home() {
               💬
             </div>
             <h4 className="text-xl font-bold">Live AI Classes</h4>
-            <p className="text-slate-500 text-sm">Real-time feedback from industry professionals who have worked at top-tier tech firms through our live AI classes for kids India.</p>
+            <p className="text-slate-500 text-sm">Interactive live AI classes with expert mentorship, real-time guidance, and hands-on projects that help students build practical AI skills confidently.</p>
           </div>
           <div className="flex flex-col items-center text-center p-6 space-y-4">
             <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center text-2xl text-purple-500 mb-2">
