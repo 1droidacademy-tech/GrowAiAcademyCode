@@ -32,15 +32,44 @@ export default async function AdminDashboard({
   const currentTab = typeof resolvedSearchParams?.tab === 'string' ? resolvedSearchParams.tab : 'dashboard';
 
   // Fetch admin stats - wrapping in try-catch to allow UI render if DB isn't fully seeded
-  let totalUsers = 12482, totalRevenue = 84200, activeCourses = 142;
+  let totalUsers = 12482, totalRevenue = 84200, activeCourses = 142, uniqueVisitors = 0;
   let recentUsers: any[] = [];
   let recentPayments: any[] = [];
+  let visitorStats: { date: string, count: number }[] = [];
 
   try {
     totalUsers = await prisma.user.count({ where: { role: "STUDENT" } }) || 12482;
     const revData = await prisma.payment.aggregate({ _sum: { amount: true }, where: { status: "SUCCESS" } });
     totalRevenue = revData._sum.amount || 84200;
     activeCourses = await prisma.course.count({ where: { status: "ACTIVE" } }) || 142;
+    uniqueVisitors = await prisma.uniqueVisitor.count() || 0;
+    
+    // Fetch last 7 days visitor stats
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+    sevenDaysAgo.setHours(0, 0, 0, 0);
+
+    const recentVisitors = await prisma.uniqueVisitor.findMany({
+      where: { created_at: { gte: sevenDaysAgo } },
+      select: { created_at: true }
+    });
+
+    const last7Days = Array.from({ length: 7 }).map((_, i) => {
+      const d = new Date();
+      d.setDate(d.getDate() - (6 - i));
+      d.setHours(0, 0, 0, 0);
+      return d;
+    });
+
+    visitorStats = last7Days.map(date => {
+      const nextDate = new Date(date);
+      nextDate.setDate(nextDate.getDate() + 1);
+      const count = recentVisitors.filter(v => v.created_at >= date && v.created_at < nextDate).length;
+      return {
+        date: date.toLocaleDateString('en-US', { weekday: 'short' }),
+        count
+      };
+    });
     
     recentUsers = await prisma.user.findMany({
       orderBy: { created_at: "desc" },
@@ -137,7 +166,7 @@ export default async function AdminDashboard({
          {currentTab === 'dashboard' ? (
             <>
               {/* Stats Row */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
                  <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-50 flex items-center justify-between">
                     <div>
                        <div className="w-14 h-14 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center mb-4 text-xl">👥</div>
@@ -167,6 +196,16 @@ export default async function AdminDashboard({
                     <div className="flex -space-x-2 self-start">
                       <div className="w-6 h-6 rounded-full bg-indigo-400"></div>
                       <div className="w-6 h-6 rounded-full bg-cyan-400"></div>
+                    </div>
+                 </div>
+                 <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-50 flex items-center justify-between">
+                    <div>
+                       <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4 text-xl">👁️</div>
+                       <div className="text-sm font-medium text-slate-500 mb-1">Unique Visitors</div>
+                       <div className="text-4xl font-bold text-slate-800">{uniqueVisitors.toLocaleString()}</div>
+                    </div>
+                    <div className="bg-emerald-50/50 text-emerald-600 font-bold text-sm px-3 py-1 rounded-full self-start">
+                      Live
                     </div>
                  </div>
               </div>
@@ -229,6 +268,46 @@ export default async function AdminDashboard({
 
                 {/* Side Stack */}
                 <div className="space-y-8">
+                   {/* Visitor Analytics Chart */}
+                   <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-50">
+                      <div className="flex justify-between items-end mb-6">
+                         <h3 className="text-xl font-bold text-slate-800">Traffic (7 Days)</h3>
+                         <div className="text-sm font-bold text-emerald-500 bg-emerald-50 px-3 py-1 rounded-full">Live</div>
+                      </div>
+                      <div className="flex items-end justify-between h-40 gap-2 mt-4 relative">
+                         {/* Optional grid lines */}
+                         <div className="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-10">
+                            <div className="border-t border-slate-800 w-full"></div>
+                            <div className="border-t border-slate-800 w-full"></div>
+                            <div className="border-t border-slate-800 w-full"></div>
+                         </div>
+                         
+                         {visitorStats.length > 0 ? visitorStats.map((stat, idx) => {
+                            const maxCount = Math.max(...visitorStats.map(s => s.count), 1);
+                            const heightPercentage = Math.max((stat.count / maxCount) * 100, 5); // min 5% height for visibility
+                            
+                            return (
+                               <div key={idx} className="flex flex-col items-center flex-1 z-10 group relative">
+                                  {/* Tooltip */}
+                                  <div className="opacity-0 group-hover:opacity-100 absolute -top-10 bg-slate-800 text-white text-xs font-bold px-2 py-1 rounded shadow-lg transition-opacity pointer-events-none whitespace-nowrap">
+                                    {stat.count} visitors
+                                  </div>
+                                  
+                                  {/* Bar */}
+                                  <div className="w-full max-w-[40px] bg-emerald-100 rounded-t-lg group-hover:bg-emerald-200 transition-colors flex flex-col justify-end overflow-hidden" style={{ height: '140px' }}>
+                                     <div className="w-full bg-emerald-500 rounded-t-md group-hover:bg-emerald-400 transition-colors" style={{ height: `${heightPercentage}%` }}></div>
+                                  </div>
+                                  
+                                  {/* Label */}
+                                  <div className="text-xs font-bold text-slate-400 mt-3">{stat.date}</div>
+                               </div>
+                            );
+                         }) : (
+                            <div className="w-full h-full flex items-center justify-center text-slate-400 font-medium text-sm">Loading data...</div>
+                         )}
+                      </div>
+                   </div>
+
                    {/* Contact Inquiries Inbox */}
                    <AdminContactMessages />
 

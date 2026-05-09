@@ -110,3 +110,11 @@ enum Role {
 
   @@schema("growaiedu")
 }
+
+model UniqueVisitor {
+  id         String   @id @default(uuid())
+  visitor_id String   @unique
+  created_at DateTime @default(now())
+
+  @@schema("growaiedu")
+}

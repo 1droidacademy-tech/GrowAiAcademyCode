@@ -7,6 +7,7 @@ import { cookies } from "next/headers";
 import { verifyToken } from "@/lib/auth";
 import UserMenu from "@/components/UserMenu";
 import Navbar from "@/components/Navbar";
+import AnalyticsTracker from "@/components/AnalyticsTracker";
 
 const inter = Inter({
   variable: "--font-family-sans",
@@ -75,6 +76,7 @@ export default async function RootLayout({
       className={`${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans text-slate-900 group/body">
+        <AnalyticsTracker />
         
         {/* Universal Navigation */}
         <Navbar user={user} />
