@@ -21,6 +21,7 @@ model User {
   enrollments   Enrollment[]
   reset_tokens  PasswordResetToken[]
   payments      Payment[]
+  quiz_attempts QuizAttempt[]
 
   @@schema("growaiedu")
 }
@@ -115,6 +116,32 @@ model UniqueVisitor {
   id         String   @id @default(uuid())
   visitor_id String   @unique
   created_at DateTime @default(now())
+
+  @@schema("growaiedu")
+}
+
+model QuizQuestion {
+  id            String   @id @default(uuid())
+  question      String
+  options       String[]
+  correctOption Int
+  topic         String
+  timeLimit     Int      @default(30)
+  points        Int      @default(10)
+  created_at    DateTime @default(now())
+
+  @@schema("growaiedu")
+}
+
+model QuizAttempt {
+  id             String   @id @default(uuid())
+  user_id        String
+  score          Int
+  totalQuestions Int
+  correctAnswers Int
+  timeTaken      Int
+  completed_at   DateTime @default(now())
+  user           User     @relation(fields: [user_id], references: [id])
 
   @@schema("growaiedu")
 }
