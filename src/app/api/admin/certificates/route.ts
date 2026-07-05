@@ -122,7 +122,7 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    return NextResponse.json(certificate, { status: 21 });
+    return NextResponse.json(certificate, { status: 201 });
   } catch (error) {
     console.error("Error creating certificate:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
