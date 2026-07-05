@@ -145,3 +145,14 @@ model QuizAttempt {
 
   @@schema("growaiedu")
 }
+
+model Certificate {
+  id           String   @id
+  student_name String
+  course_title String
+  grade        String?
+  issue_date   DateTime @default(now())
+  created_at   DateTime @default(now())
+
+  @@schema("growaiedu")
+}

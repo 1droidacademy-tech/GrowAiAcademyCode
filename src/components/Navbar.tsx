@@ -26,6 +26,7 @@ export default function Navbar({ user }: NavbarProps) {
           <Link href="/" className="hover:text-indigo-600 transition-colors">Home</Link>
           <Link href="/ai-course-for-school-students/ai-bootcamp" className="hover:text-indigo-600 transition-colors">Curriculum</Link>
           <Link href="/contact-ai-course" className="hover:text-indigo-600 transition-colors">Contact</Link>
+          <Link href="/ai-certificate" className="hover:text-indigo-600 transition-colors">Verify Certificate</Link>
         </div>
 
         <div className="flex items-center gap-4">
@@ -94,6 +95,13 @@ export default function Navbar({ user }: NavbarProps) {
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Contact
+          </Link>
+          <Link 
+            href="/ai-certificate" 
+            className="text-lg font-bold text-slate-800"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Verify Certificate
           </Link>
           
           {!user && (

@@ -11,6 +11,7 @@ import AdminStudentsManager from "@/components/AdminStudentsManager";
 import AdminCurriculumManager from "@/components/AdminCurriculumManager";
 import AdminPaymentsManager from "@/components/AdminPaymentsManager";
 import AdminQuizManager from "@/components/AdminQuizManager";
+import AdminCertificateManager from "@/components/AdminCertificateManager";
 
 export default async function AdminDashboard({
   searchParams,
@@ -121,6 +122,9 @@ export default async function AdminDashboard({
           </Link>
           <Link href="?tab=quiz-game" className={`flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-colors ${currentTab === 'quiz-game' ? 'bg-indigo-50/60 text-indigo-700' : 'text-slate-500 hover:bg-slate-50'}`}>
              <span className="text-xl">🎮</span> Quiz Game
+          </Link>
+          <Link href="?tab=certificates" className={`flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-colors ${currentTab === 'certificates' ? 'bg-indigo-50/60 text-indigo-700' : 'text-slate-500 hover:bg-slate-50'}`}>
+             <span className="text-xl">🎓</span> Certificates
           </Link>
           <Link href="?tab=ai-models" className={`flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-colors ${currentTab === 'ai-models' ? 'bg-indigo-50/60 text-indigo-700' : 'text-slate-500 hover:bg-slate-50'}`}>
              <span className="text-xl">🤖</span> AI Models
@@ -366,6 +370,8 @@ export default async function AdminDashboard({
             <AdminPaymentsManager />
           ) : currentTab === 'quiz-game' ? (
             <AdminQuizManager />
+          ) : currentTab === 'certificates' ? (
+            <AdminCertificateManager />
           ) : (
             <div className="bg-white rounded-3xl p-16 shadow-sm border border-slate-50 flex flex-col items-center justify-center text-center">
               <div className="w-20 h-20 bg-indigo-50 rounded-full flex items-center justify-center text-3xl mb-6">
